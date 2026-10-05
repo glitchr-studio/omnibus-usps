@@ -3,7 +3,6 @@
 namespace Omnibus\Usps;
 
 use Omnibus\Config;
-use Omnibus\Exception\InvalidConfigException;
 use Omnibus\GatewayFactory;
 use Omnibus\Usps\Action\PickupAction;
 use Omnibus\Usps\Action\RatingAction;
@@ -34,7 +33,7 @@ final class UspsGatewayFactory extends GatewayFactory
             'mid' => null,
             'account' => null,
             'omnibus.api' => function (Config $c) {
-                $http = $this->http ?? (class_exists(HttpClient::class) ? HttpClient::create() : throw new InvalidConfigException('The "usps" gateway needs symfony/http-client.'));
+                $http = $this->http ?? HttpClient::create();
 
                 return new Api($http, (string) $c['client_id'], (string) $c['client_secret'], (bool) $c['sandbox'], $c['crid'] ?: null, $c['mid'] ?: null, $c['account'] ?: null);
             },

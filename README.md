@@ -4,6 +4,13 @@ USPS for [glitchr/omnibus](https://github.com/glitchr-studio/omnibus): prices (D
 International Prices APIs), domestic labels (Labels API, paid through the Payments API), tracking
 (Tracking API) and drop-off locations (Locations API) - the USPS APIs v3 with OAuth2.
 
+```php
+$gateway = (new UspsGatewayFactory($http))->create($options);   // $http: the application's HTTP client - none given, the factory makes its own; the options below
+```
+
+No framework needed: the package requires `glitchr/omnibus` and `symfony/http-client`. In a
+Symfony application, the same through the bundle's configuration:
+
 ```yaml
 omnibus:
     gateways:
